@@ -1,0 +1,14 @@
+cd C:\xampp\htdocs\Blockchain_Insurance\truffle
+
+open ganache load smart contract
+
+truffle console --network healthcare
+truffle migrate --all
+web3.eth.getAcccounts()
+
+start xamp
+
+loacalhost
+	 -->php myadmin
+
+http://localhost/Blockchain_Insurance/index.html

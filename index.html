@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>EMR Dapp</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="/node_modules/web3/dist/web3.min.js"></script> -->
+    <!-- <script src="js/bundle.js"></script> -->
+
+    <!-- Custom CSS -->
+    <style>
+    .panel-heading{
+        margin-bottom: 20px;
+    }
+    .navbar{
+        margin-bottom: 70px;
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">EMR Dapp</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="./index.html">Login</a>
+                    </li>
+                    <li>
+                        <a href="./register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading"><h3 class="text-center">Please sign <strong>"Log me in!"</strong> (without quotes) with your private key and enter the signature below.</h3></div> -->
+            <div class="panel-heading"><h3 class="text-center">Please enter your Public Key to continue.</h3></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="alert alert-warning col-sm-8 col-sm-offset-2" style="display: none;">
+                        <strong>Warning!</strong> Incorrect public key or unregistered user. Check your public key or click <a href="./register.html">here</a> to register. 
+                        <!-- <strong>Warning!</strong> Incorrect signature or unregistered user. Check your signature or click <a href="./register.html">here</a> to register.  -->
+                    </div>
+                </div>
+
+                <!-- <form class="form-horizontal" action="/action_page.php">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Signature:</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="email" placeholder="Enter signature" required>
+                        </div>
+                    </div>
+                    <div class="form-group"> 
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg" onclick="redirect()">Login</button>
+                        </div>
+                    </div>
+                </form> -->
+
+                <form class="form-horizontal" name="loginForm" action="loginphp.php" method="post">
+					<div class="form-group">
+                        <label class="control-label col-sm-2">Login Type:</label>
+                        <div class="col-sm-8">
+                            <select name="type" id="type" class="form-control">
+								  <option value="Doctor">Doctor</option>
+								  <option value="Patient">Patient</option>
+								  <option value="Insurance">Insurance</option>								  
+								</select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="Username">Username:</label>
+                        <div class="col-sm-8">
+                            <input type="age" class="form-control" id="Username" placeholder="Enter Username" name = "uname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="Password">Password:</label>
+                        <div class="col-sm-8"> 
+                            <input type="text" class="form-control" id="Password" placeholder="Enter password" name = "pass" required>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-lg" type="submit" >Login</button>
+                    </div>
+                </form>
+                
+
+            </div>
+            <div class="panel-footer">
+                <a href="#help" data-toggle="collapse"><h4>Need help?</h4></a>
+                <h4 class="collapse text-muted" id="help">
+                    You can sign the message by going to this <a href="https://anders.com/blockchain/public-private-keys/signatures.html" target="_blank">link.</a> Paste the signature generated on the above input field and click the button to continue.
+                </h4>
+            </div>
+        </div>
+        
+     
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery Version 1.11.1 -->
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+    <script>
+        // function redirect(){
+        //     window.location.href = "./register.html?key=234"
+        // }
+
+        function login(){
+           //var Web3= require('web3');
+       if (typeof web3 !== 'undefined') {
+           web3 = new Web3(web3.currentProvider);
+       } else {
+           web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+       }
+
+	   
+
+	   //console.log(address);
+       web3.eth.defaultAccount = web3.eth.getAccounts[0];
+	   //web3.eth.defaultAccount = '0x194E67Ccfa4625c6F4060bF8E1dE31f2D890Ec14';
+	   //console.log(web3.eth.defaultAccount);
+	   web3.eth.sendTransaction({from:'0xce342c8C41F79447963f136A0f2087DD42947A07', to:'0xD151b99E2d1721b38E373dBdB744c0D80378c4ba',value: '1000000000000000'});
+
+        }
+
+     
+        
+    </script>
+
+</body>
+
+</html>

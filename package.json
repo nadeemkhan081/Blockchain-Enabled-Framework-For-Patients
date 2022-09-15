@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "-": "^0.0.1",
+    "ethereumjs-testrpc": "^3.9.2",
+    "ganache": "^6.4.4",
+    "ganache-cli": "^6.12.2",
+    "save": "^2.4.0",
+    "solc": "^0.8.1",
+    "web3": "^0.20.1",
+    "web3.js": "github:ethereum/web3.js"
+  }
+}
